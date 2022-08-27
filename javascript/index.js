@@ -8,17 +8,17 @@ $(function(){
 	var operacao = "A"; //"A"=Adição; "E"=Edição
 
 	var indice_selecionado = -1;
-	var tbClientes = localStorage.getItem("tbClientes");// Recupera os dados armazenados
+	var tbAlunos = localStorage.getItem("tbAlunos");// Recupera os dados armazenados
 
-	tbClientes = JSON.parse(tbClientes); // Converte string para objeto
+	tbAlunos = JSON.parse(tbAlunos); // Converte string para objeto
 
-	if(tbClientes == null) // Caso não haja conteúdo, iniciamos um vetor vazio
-		tbClientes = [];
+	if(tbAlunos == null) // Caso não haja conteúdo, iniciamos um vetor vazio
+		tbAlunos = [];
 
 	// Função para adicionar registros
 	function Adicionar(){
 		//variável para verificar se número de código já existe
-		var cli = GetCliente("Codigo", $("#txtCodigo").val());
+		var cli = GetAlunos("Codigo", $("#txtCodigo").val());
 
 	// Caso existe é informado ao cliente
 		if(cli != null){
@@ -26,17 +26,24 @@ $(function(){
 			return;
 		}
 	// caso contrário insere
-		var cliente = JSON.stringify({
-			Codigo   : $("#txtCodigo").val(),
-			Nome     : $("#txtNome").val(),
-			Telefone : $("#txtTelefone").val(),
-			Email    : $("#txtEmail").val(),
-			DtCad    : $("#txtDtCad").val()
+		var aluno = JSON.stringify({
+			Matricula	: $("#txtRm").val(),
+			Nome     	: $("#txtNome").val(),
+			Telefone 	: $("#txtTelefone").val(),
+			Email    	: $("#txtEmail").val(),
+			DtCad    	: $("#txtDtCursoCadastro").val(),
+			HrCad    	: $("#txtHoraCadastro").val(),
+			Curso    	: $("#txtCurso").val(),
+			DtCurso 	: $("#txtDtCurso").val(),
+			HrCurso   	: $("#txtHora").val()
+
+
+
 		});
 
 		
-		tbClientes.push(cliente);
-		localStorage.setItem("tbClientes", JSON.stringify(tbClientes));
+		tbAlunos.push(aluno);
+		localStorage.setItem("tbAlunos", JSON.stringify(tbAlunos));
 		alert("Registro adicionado.");
 		return true;
 		
@@ -45,14 +52,14 @@ $(function(){
 
 	// Função para editar clientes
 	function Editar(){
-		tbClientes[indice_selecionado] = JSON.stringify({
+		tbAlunos[indice_selecionado] = JSON.stringify({
 				Codigo   : $("#txtCodigo").val(),
 				Nome     : $("#txtNome").val(),
 				Telefone : $("#txtTelefone").val(),
 				Email    : $("#txtEmail").val(),
 				DtCad    : $("#txtDtCad").val()
 			});
-		localStorage.setItem("tbClientes", JSON.stringify(tbClientes));
+		localStorage.setItem("tbAlunos", JSON.stringify(tbAlunos));
 		alert("Informações editadas.")
 		operacao = "A";
 		return true;
@@ -64,7 +71,7 @@ $(function(){
 			"<thead>"+
 			"	<tr>"+
 			"<th></th>"+
-			"	<th>Código</th>"+
+			"	<th>Matricula</th>"+
 			"	<th>Pessoa</th>"+
 			"	<th>Telefone</th>"+
 			"	<th>Email</th>"+
@@ -76,27 +83,30 @@ $(function(){
 			);
 
 		// Malha de repetição para inserir todos os registros
-		 for(var i in tbClientes){
-			var cli = JSON.parse(tbClientes[i]);
+		 for(var i in tbAlunos){
+			var cli = JSON.parse(tbAlunos[i]);
 			// Formatar data para o format brasileiro dia, mes, ano
 			var dtfinal = cli.DtCad.substring(8,10) + "/" +cli.DtCad.substring(5,7)  +"/"  +cli.DtCad.substring(0,4);
+			var dtCursofinal = cli.DtCurso.substring(8,10) + "/" +cli.DtCad.substring(5,7)  +"/"  +cli.DtCad.substring(0,4);
 		  	$("#tblListar tbody").append("<tr>"+
 									 	 "	<td><img src='img/edit.png' alt='"+i+"' class='btnEditar'/><img src='img/delete.png' alt='"+i+"' class='btnExcluir'/></td>" + 
-										 "	<td>"+cli.Codigo+"</td>" + 
+										 "	<td>"+cli.Matricula+"</td>" + 
 										 "	<td>"+cli.Nome+"</td>" + 
 										 "	<td>"+cli.Telefone+"</td>" + 
 										 "	<td>"+cli.Email+"</td>" + 
 										 "	<td>"+dtfinal+"</td>" + 
+										 "<td>"+cli.Curso+"</td>" +
+										 "<td>"+dtCursofinal+"</td>" +
 		  								 "</tr>");
 		 }
 	}
 
-		// Função para excluir alunos
+		// Função para excluir aluno
 	function Excluir(){
 		tbAlunos.splice(indice_selecionado, 1);
 		localStorage.setItem("tbAlunos", JSON.stringify(tbAlunos));
-		confirm("Deseja realmente excluir o aluno?");
-		//alert("Registro excluído.");
+		confirm("Deseja realmente excluir");
+		alert("Aluno excluído com sucesso!");
 	}
 
 	// função pesquisar aluno 
@@ -123,7 +133,7 @@ $(function(){
 	$("#tblListar").on("click", ".btnEditar", function(){
 		operacao = "E";
 		indice_selecionado = parseInt($(this).attr("alt"));
-		var cli = JSON.parse(tbClientes[indice_selecionado]);
+		var cli = JSON.parse(tbAlunos[indice_selecionado]);
 		$("#txtCodigo").val(cli.Codigo);
 		$("#txtNome").val(cli.Nome);
 		$("#txtTelefone").val(cli.Telefone);
@@ -140,10 +150,10 @@ $(function(){
 	});
 
 	// ultimo codigo
-	var ultimo = JSON.parse(tbClientes.slice(-1));
+	var ultimo = JSON.parse(tbAlunos.slice(-1));
 	var ultconv = parseInt(ultimo.Codigo);
 	
-			$("#txtCodigo").val(ultconv+1);
+			$("#txtRm").val(ultconv+1);
 // status
 $("#txtNome").change(function () {
 	//alert( $( this ).val() );
