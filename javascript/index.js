@@ -92,6 +92,9 @@ $(function () {
 			"	<th>Telefone</th>"+
 			"	<th>Email</th>"+
 			"	<th>Data Cad</th>"+
+			"	<th>Curso</th>"+
+			"	<th>Data Curso</th>"+
+			"	<th>Hora Curso</th>"+
 			"	</tr>"+
 			"</thead>"+
 			"<tbody>"+
@@ -108,7 +111,7 @@ $(function () {
 
 			var dtCursofinal = cli.DtCurso.substring(8,10) + "/" +cli.DtCurso.substring(5,7)  +"/"  +cli.DtCurso.substring(0,4);
 		  	$("#tblListar tbody").append("<tr>"+
-									 	 "	<td><img src='img/edit.png' alt='"+i+"' class='btnEditar'/><img src='img/delete.png' alt='"+i+"' class='btnExcluir'/></td>" + 
+									 	 "	<td><img src='./img/edit.png' alt='"+i+"' class='btnEditar'/><img src='./img/delete.png' alt='"+i+"' class='btnExcluir'/></td>" + 
 										 "	<td>"+cli.Matricula+"</td>" + 
 										 "	<td>"+cli.Nome+"</td>" + 
 										 "	<td>"+cli.Telefone+"</td>" + 
@@ -116,6 +119,7 @@ $(function () {
 										 "	<td>"+cli.DtCad+"</td>" + 
 										 "<td>"+cli.Curso+"</td>" +
 										 "<td>"+dtCursofinal+"</td>" +
+										 "<td>"+cli.HrCurso+"</td>" +
 		  								 "</tr>");
 		 }
 	}
