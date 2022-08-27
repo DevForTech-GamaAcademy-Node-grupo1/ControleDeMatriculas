@@ -91,19 +91,19 @@ $(function(){
 		 }
 	}
 
-		// Função para excluir registros
+		// Função para excluir alunos
 	function Excluir(){
-		tbClientes.splice(indice_selecionado, 1);
-		localStorage.setItem("tbClientes", JSON.stringify(tbClientes));
-		confirm("Deseja realmente excluir");
+		tbAlunos.splice(indice_selecionado, 1);
+		localStorage.setItem("tbAlunos", JSON.stringify(tbAlunos));
+		confirm("Deseja realmente excluir o aluno?");
 		//alert("Registro excluído.");
 	}
 
-	// função par pesquisar cliente
-	function GetCliente(propriedade, valor){
+	// função pesquisar aluno 
+	function GetAluno(propriedade, valor){
 		var cli = null;
-        for (var item in tbClientes) {
-            var i = JSON.parse(tbClientes[item]);
+        for (var item in tbAlunos) {
+            var i = JSON.parse(tbAlunos[item]);
             if (i[propriedade] == valor)
                 cli = i;
         }
