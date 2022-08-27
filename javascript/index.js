@@ -109,8 +109,8 @@ $(function(){
 		alert("Aluno excluído com sucesso!");
 	}
 
-	// função par pesquisar cliente
-	function GetAlunos(propriedade, valor){
+	// função pesquisar aluno 
+	function GetAluno(propriedade, valor){
 		var cli = null;
         for (var item in tbAlunos) {
             var i = JSON.parse(tbAlunos[item]);
