@@ -18,7 +18,7 @@ $(function(){
 	// Função para adicionar registros
 	function Adicionar(){
 		//variável para verificar se número de código já existe
-		var cli = GetAlunos("Codigo", $("#txtCodigo").val());
+		var cli = GetAlunos("Codigo", $("#txtRm").val());
 
 	// Caso existe é informado ao cliente
 		if(cli != null){
