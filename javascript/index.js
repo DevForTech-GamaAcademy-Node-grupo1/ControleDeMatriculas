@@ -5,11 +5,17 @@ gravadas permanecerão lá  */
 
 $(function () {
 	
+	
 	setInterval(() => {
-    var today = new Date();
+		if(operacao == 'A')
+			atualizaHoraEData()
+	}, 500);
+	
+	function atualizaHoraEData() {
+		var today = new Date();
     document.getElementById("txtDtCursoCadastro").value = today.toLocaleDateString();
     document.getElementById("txtHoraCadastro").value = today.toLocaleTimeString();
-  }, 500);
+	}
 
 	var operacao = "A"; //"A"=Adição; "E"=Edição
 
@@ -18,20 +24,25 @@ $(function () {
 
 	tbAlunos = JSON.parse(tbAlunos); // Converte string para objeto
 
-	if(tbAlunos == null) // Caso não haja conteúdo, iniciamos um vetor vazio
+	if (tbAlunos == null) { // Caso não haja conteúdo, iniciamos um vetor vazio
 		tbAlunos = [];
+		$("#txtRm").val(1);
+	}
+	
 
 	// Função para adicionar registros
 	function Adicionar(){
 		//variável para verificar se número de código já existe
-		var cli = GetAlunos("Codigo", $("#txtRm").val());
+
+		var cli = GetAluno("Matricula", $("#txtRm").val());
 
 	// Caso existe é informado ao cliente
 		if(cli != null){
 			alert("Código já cadastrado.");
 			return;
 		}
-	// caso contrário insere
+
+		// caso contrário insere
 		var aluno = JSON.stringify({
 			Matricula	: $("#txtRm").val(),
 			Nome     	: $("#txtNome").val(),
@@ -42,33 +53,30 @@ $(function () {
 			Curso    	: $("#txtCurso").val(),
 			DtCurso 	: $("#txtDtCurso").val(),
 			HrCurso   	: $("#txtHora").val()
-
-
-
 		});
-
-		console.log(aluno.DtCad);
-		console.log(aluno.Curso);
 		
 		tbAlunos.push(aluno);
 		localStorage.setItem("tbAlunos", JSON.stringify(tbAlunos));
 		alert("Registro adicionado.");
 		return true;
-		
 	}
-	
 
 	// Função para editar clientes
-	function Editar(){
+	function Editar() {
+		let aluno = JSON.parse(tbAlunos[indice_selecionado])//.parse(tbAlunos[indice]);
 		tbAlunos[indice_selecionado] = JSON.stringify({
-				Codigo   : $("#txtCodigo").val(),
-				Nome     : $("#txtNome").val(),
-				Telefone : $("#txtTelefone").val(),
-				Email    : $("#txtEmail").val(),
-				DtCad    : $("#txtDtCad").val()
-			});
+				Matricula	: $("#txtRm").val(),
+				Nome     	: $("#txtNome").val(),
+				Telefone 	: $("#txtTelefone").val(),
+				Email    	: $("#txtEmail").val(),
+				DtCad    	: aluno.DtCad,
+				HrCad    	: aluno.HrCad,
+				Curso    	: $("#txtCurso").val(),
+				DtCurso 	: $("#txtDtCurso").val(),
+				HrCurso   	: $("#txtHora").val()
+		});
+		console.log(tbAlunos[indice_selecionado]);
 		localStorage.setItem("tbAlunos", JSON.stringify(tbAlunos));
-		alert("Informações editadas.")
 		operacao = "A";
 		return true;
 	}
@@ -145,12 +153,15 @@ $(function () {
 		operacao = "E";
 		indice_selecionado = parseInt($(this).attr("alt"));
 		var cli = JSON.parse(tbAlunos[indice_selecionado]);
-		$("#txtCodigo").val(cli.Codigo);
+		$("#txtRm").val(cli.Matricula);
 		$("#txtNome").val(cli.Nome);
 		$("#txtTelefone").val(cli.Telefone);
 		$("#txtEmail").val(cli.Email);
-		$("#txtDtCursoCadastro").val()(cli.DtCad);
-		$("#txtCodigo").attr("readonly","readonly");
+		$("#txtDtCursoCadastro").val(cli.DtCad);
+		$("#txtHoraCursoCadastro").val(cli.HrCad);
+		$("#txtDtCurso").val(cli.DtCurso);
+		$("#txtHrCurso").val(cli.HrCurso);
+		$("#txtRm").attr("readonly","readonly");
 		$("#txtNome").focus();
 	});
 	// Ação com base nos eventos do botão Excluir
@@ -162,7 +173,7 @@ $(function () {
 
 	// ultimo codigo
 	var ultimo = JSON.parse(tbAlunos.slice(-1));
-	var ultconv = parseInt(ultimo.Codigo);
+	var ultconv = parseInt(ultimo.Matricula);
 	
 			$("#txtRm").val(ultconv+1);
 // status
