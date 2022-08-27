@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/index.css" media="screen" />
+    <script defer src="/javascript/index.js" ></script>  
+    <title>Controle de matricula</title>
+</head>
+<body>
+
+    <!-- Formulário para cadastro dos clientes -->
+	<form id="frmCadastro">
+
+        <label for="txtRm">Registro de Matrícula:</label>
+        <input type="text" id="txtRm" /><br>
+
+        <label for="txtNome">Nome do aluno:</label>
+        <input type="text" id="txtNome" /><br>
+
+        <label for="txtTelefone">Telefone:</label>
+        <input type="text" id="txtTelefone"/><br>
+
+        <label for="txtEmail">Email:</label>
+        <input type="text" id="txtEmail"/><br>
+
+        <label for="txtStatus">Cursos:</label>
+        <select name="select">
+            <option value="java">Java</option>
+            <option value="javascript" selected>JavaScript</option>
+            <option value="banco">Banco de Dados</option>
+        </select>
+
+        <input type="date" id="txtDtCursoCadastro" disabled /><br>
+        <input type="time" id="txtHoraCadastro" disabled /><br>
+
+        <label for="txtDtCurso">Data curso:</label>
+        <input type="date" id="txtDtCurso"/><br>
+
+        <label for="txtHora">Hora curso:</label>
+        <input type="time" id="txtHora"/><br>
+
+        <input type="submit" value="Salvar" id="btnSalvar" />
+    
+
+</form>
+    
+</body>
+</html>
