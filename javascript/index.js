@@ -7,12 +7,8 @@ $(function () {
 	
 	setInterval(() => {
     var today = new Date();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var day = ("0" + today.getDate()).slice(-2);
-    var month = ("0" + (today.getMonth() + 1)).slice(-2);
-    var now = today.getFullYear() + "-" + (month) + "-" + (day);
-    document.getElementById("txtDtCursoCadastro").value = now;
-    document.getElementById("txtHoraCadastro").value = time;
+    document.getElementById("txtDtCursoCadastro").value = today.toLocaleDateString();
+    document.getElementById("txtHoraCadastro").value = today.toLocaleTimeString();
   }, 500);
 
 	var operacao = "A"; //"A"=Adição; "E"=Edição
