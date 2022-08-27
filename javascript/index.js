@@ -91,12 +91,12 @@ $(function(){
 		 }
 	}
 
-		// Função para excluir registros
+		// Função para excluir aluno
 	function Excluir(){
-		tbClientes.splice(indice_selecionado, 1);
-		localStorage.setItem("tbClientes", JSON.stringify(tbClientes));
+		tbAlunos.splice(indice_selecionado, 1);
+		localStorage.setItem("tbAlunos", JSON.stringify(tbAlunos));
 		confirm("Deseja realmente excluir");
-		//alert("Registro excluído.");
+		alert("Aluno excluído com sucesso!");
 	}
 
 	// função par pesquisar cliente
