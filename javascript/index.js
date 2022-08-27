@@ -47,6 +47,8 @@ $(function () {
 
 		});
 
+		console.log(aluno.DtCad);
+		console.log(aluno.Curso);
 		
 		tbAlunos.push(aluno);
 		localStorage.setItem("tbAlunos", JSON.stringify(tbAlunos));
@@ -92,15 +94,18 @@ $(function () {
 		 for(var i in tbAlunos){
 			var cli = JSON.parse(tbAlunos[i]);
 			// Formatar data para o format brasileiro dia, mes, ano
-			var dtfinal = cli.DtCad.substring(8,10) + "/" +cli.DtCad.substring(5,7)  +"/"  +cli.DtCad.substring(0,4);
-			var dtCursofinal = cli.DtCurso.substring(8,10) + "/" +cli.DtCad.substring(5,7)  +"/"  +cli.DtCad.substring(0,4);
+			//console.log(cli.Curso);
+			//console.log(cli.DtCad);
+			
+
+			var dtCursofinal = cli.DtCurso.substring(8,10) + "/" +cli.DtCurso.substring(5,7)  +"/"  +cli.DtCurso.substring(0,4);
 		  	$("#tblListar tbody").append("<tr>"+
 									 	 "	<td><img src='img/edit.png' alt='"+i+"' class='btnEditar'/><img src='img/delete.png' alt='"+i+"' class='btnExcluir'/></td>" + 
 										 "	<td>"+cli.Matricula+"</td>" + 
 										 "	<td>"+cli.Nome+"</td>" + 
 										 "	<td>"+cli.Telefone+"</td>" + 
 										 "	<td>"+cli.Email+"</td>" + 
-										 "	<td>"+dtfinal+"</td>" + 
+										 "	<td>"+cli.DtCad+"</td>" + 
 										 "<td>"+cli.Curso+"</td>" +
 										 "<td>"+dtCursofinal+"</td>" +
 		  								 "</tr>");
@@ -144,7 +149,7 @@ $(function () {
 		$("#txtNome").val(cli.Nome);
 		$("#txtTelefone").val(cli.Telefone);
 		$("#txtEmail").val(cli.Email);
-		$("#txtDtCad").val()(cli.DtCad);
+		$("#txtDtCursoCadastro").val()(cli.DtCad);
 		$("#txtCodigo").attr("readonly","readonly");
 		$("#txtNome").focus();
 	});
@@ -203,7 +208,7 @@ $("#txtNome").change(function () {
 
 	// Mostra o resultado
 	//alert('Hoje é ' + str_data + ' às ' + str_hora);
-	$("#txtDtCad").val(str_data_Brazil);
+	$("#txtDtCursoCadastro").val(str_data_Brazil);
 	$("#txtHora").val(hora_geral);
 
 	//alert(hora_geral);
