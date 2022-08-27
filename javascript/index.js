@@ -3,7 +3,17 @@ ao fim da seção, logo, podemos fechar e abrir o browser várias vezes e as inf
 gravadas permanecerão lá  */
 // Inicio da Função JSON
 
-$(function(){
+$(function () {
+	
+	setInterval(() => {
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var day = ("0" + today.getDate()).slice(-2);
+    var month = ("0" + (today.getMonth() + 1)).slice(-2);
+    var now = today.getFullYear() + "-" + (month) + "-" + (day);
+    document.getElementById("txtDtCursoCadastro").value = now;
+    document.getElementById("txtHoraCadastro").value = time;
+  }, 500);
 
 	var operacao = "A"; //"A"=Adição; "E"=Edição
 
